@@ -1,0 +1,8 @@
+{
+  "LandingPage": {
+    "button": "Open dialog",
+    "placeholder": "Search by name",
+    "search_button": "Search",
+    "change_language_button": "Change language"
+  }
+}

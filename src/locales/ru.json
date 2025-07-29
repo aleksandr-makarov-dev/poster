@@ -1,0 +1,8 @@
+{
+  "LandingPage": {
+    "button": "Открыть диалог",
+    "placeholder": "Поиск по имени",
+    "search_button": "Поиск",
+    "change_language_button": "Сменить язык"
+  }
+}
