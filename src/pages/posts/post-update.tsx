@@ -6,31 +6,29 @@ import {
   type PostFormInput,
   PostForm,
 } from '@/features/posts/components/post-form';
-import { updatePost } from '@/features/posts/slice';
+import { selectPostById, updatePost } from '@/features/posts/slice';
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate, useParams } from 'react-router';
 
 const formId = 'post-update-form';
 
 function PostUpdatePage() {
-  const { postId } = useParams<{ postId: string }>();
+  const { postId = '' } = useParams<{ postId: string }>();
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
-  const post = useAppSelector((state) =>
-    state.posts.find((post) => post.id === postId),
-  );
+  const post = useAppSelector((state) => selectPostById(state, postId));
 
   const handleCreatePost = (input: PostFormInput) => {
     dispatch(
       updatePost({
         // Let's pretend postId always not undefind
-        postId: postId!,
+        postId: postId,
         post: input,
       }),
     );
 
-    navigation(paths.posts.id.getHref(postId!));
+    navigation(paths.posts.id.getHref(postId));
   };
 
   if (!post) {

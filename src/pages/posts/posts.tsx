@@ -1,14 +1,15 @@
 import { useAppSelector } from '@/app/store';
+import { List } from '@/components/list';
 import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
-import { VerticalList } from '@/components/vertical-list';
 import { paths } from '@/config/paths';
 import { PostCard } from '@/features/posts/components/post-card';
+import { selectAllPosts } from '@/features/posts/slice';
 import { FilePenIcon } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 function PostsPage() {
-  const posts = useAppSelector((state) => state.posts);
+  const posts = useAppSelector((state) => selectAllPosts(state));
 
   return (
     <div className='flex flex-col'>
@@ -23,7 +24,7 @@ function PostsPage() {
           </Button>
         }
       />
-      <VerticalList
+      <List
         className='gap-y-8'
         items={posts}
         render={(post) => (
@@ -32,6 +33,7 @@ function PostsPage() {
             id={post.id}
             title={post.title}
             content={post.content}
+            userId={post.userId}
           />
         )}
       />

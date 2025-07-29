@@ -1,6 +1,8 @@
+import { useAppSelector } from '@/app/store';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { paths } from '@/config/paths';
+import { selectUserById } from '@/features/users/slice';
 import {
   ArrowDown,
   ArrowUp,
@@ -16,9 +18,12 @@ export type PostCardProps = {
   id: string;
   title: string;
   content: string;
+  userId: string;
 };
 
-export function PostCard({ id, title, content }: PostCardProps) {
+export function PostCard({ id, title, content, userId }: PostCardProps) {
+  const author = useAppSelector((state) => selectUserById(state, userId));
+
   return (
     <article className='flex flex-col gap-y-3'>
       <header className='flex flex-row justify-between items-center gap-x-3'>
@@ -28,7 +33,7 @@ export function PostCard({ id, title, content }: PostCardProps) {
               <AvatarImage src='https://github.com/shadcn.png' />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <p className='text-sm font-medium'>u/singularity</p>
+            <p className='text-sm font-medium'>{author?.name}</p>
           </div>
           <span className='text-sm'>•</span>
           <p className='text-sm'>6 hr ago</p>

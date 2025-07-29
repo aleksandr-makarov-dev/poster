@@ -12,6 +12,7 @@ const buttonVariants = cva(
       variant: {
         filled: '',
         soft: '',
+        none: '',
       },
       color: {
         blue: '',

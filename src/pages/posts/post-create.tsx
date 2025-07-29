@@ -6,7 +6,7 @@ import {
   PostForm,
   type PostFormInput,
 } from '@/features/posts/components/post-form';
-import { createPost } from '@/features/posts/slice';
+import { addPost } from '@/features/posts/slice';
 import { nanoid } from '@reduxjs/toolkit';
 import { NavLink, useNavigate } from 'react-router';
 
@@ -20,10 +20,11 @@ function PostCreatePage() {
     const id = nanoid();
 
     dispatch(
-      createPost({
+      addPost({
         id: id,
         title: input.title,
         content: input.content,
+        userId: input.userId,
       }),
     );
 

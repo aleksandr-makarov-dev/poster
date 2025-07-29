@@ -11,12 +11,15 @@ const PostPage = React.lazy(() => import('@/pages/posts/post'));
 const PostCreatePage = React.lazy(() => import('@/pages/posts/post-create'));
 const PostUpdatePage = React.lazy(() => import('@/pages/posts/post-update'));
 
+const UsersPage = React.lazy(() => import('@/pages/users/users'));
+
 export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>
           <Route path={paths.home.path} element={<LandingPage />} />
+
           <Route path={paths.posts.root.path}>
             <Route index element={<PostsPage />} />
             <Route
@@ -29,6 +32,11 @@ export function AppRouter() {
               element={<PostUpdatePage />}
             />
           </Route>
+
+          <Route path={paths.users.root.path}>
+            <Route index element={<UsersPage />} />
+          </Route>
+
           <Route path='*' element={<p>Страница не найдена</p>} />
         </Route>
       </Routes>

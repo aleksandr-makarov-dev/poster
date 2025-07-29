@@ -3,15 +3,14 @@ import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
 import { paths } from '@/config/paths';
 import { PostCard } from '@/features/posts/components/post-card';
+import { selectPostById } from '@/features/posts/slice';
 import { ArrowLeftIcon } from 'lucide-react';
 import { NavLink, useParams } from 'react-router';
 
 function PostPage() {
-  const { postId } = useParams<{ postId: string }>();
+  const { postId = '' } = useParams<{ postId: string }>();
 
-  const post = useAppSelector((state) =>
-    state.posts.find((post) => post.id === postId),
-  );
+  const post = useAppSelector((state) => selectPostById(state, postId));
 
   if (!post) {
     return <p>Post not found</p>;
@@ -29,7 +28,12 @@ function PostPage() {
           </Button>
         }
       />
-      <PostCard id={post.id} title={post.title} content={post.content} />
+      <PostCard
+        id={post.id}
+        title={post.title}
+        content={post.content}
+        userId={post.userId}
+      />
     </div>
   );
 }

@@ -22,4 +22,14 @@ export const paths = {
       getHref: (postId: string) => `/posts/${postId}/update`,
     },
   },
+
+  users: {
+    root: {
+      path: '/users',
+    },
+    id: {
+      path: ':userId',
+      getHref: (userId: string) => `/users/${userId}`,
+    },
+  },
 };
